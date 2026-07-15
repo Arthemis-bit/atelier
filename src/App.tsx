@@ -398,7 +398,6 @@ export default function App() {
                 productId={route.id || ""}
                 products={products}
                 onAddToCart={handleAddToCart}
-                onDeleteProduct={handleDeleteProduct}
                 onBack={() => {
                   const product = products.find((p) => p.id === route.id);
                   if (product && product.vendeurSlug) {
@@ -422,7 +421,6 @@ export default function App() {
               <Storefront
                 products={products}
                 onAddToCart={handleAddToCart}
-                onDeleteProduct={handleDeleteProduct}
                 selectedVendeurSlug={route.type === "boutique" ? route.vendeurSlug : undefined}
               />
             </motion.div>
@@ -507,15 +505,6 @@ export default function App() {
                   Données sauvegardées en base
                 </span>
               </div>
-
-              <button
-                id="btn-reset-demo"
-                onClick={handleResetDemo}
-                className="flex items-center gap-2 px-4 py-2 border border-charcoal bg-white text-charcoal hover:bg-charcoal hover:text-white text-[10px] uppercase tracking-widest font-sans font-bold transition-all cursor-pointer"
-              >
-                <RefreshCw className="w-3.5 h-3.5" />
-                Réinitialiser l'Atelier
-              </button>
             </div>
           </div>
 

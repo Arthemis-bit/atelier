@@ -30,7 +30,6 @@ interface ProductDetailViewProps {
   products: Product[];
   onAddToCart: (product: Product) => void;
   onBack: () => void;
-  onDeleteProduct?: (id: string) => void;
 }
 
 export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
@@ -38,7 +37,6 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
   products,
   onAddToCart,
   onBack,
-  onDeleteProduct,
 }) => {
   const [showOrderModal, setShowOrderModal] = useState(false);
   const [orderName, setOrderName] = useState("");
@@ -278,22 +276,6 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
                 </>
               )}
             </button>
-
-            {onDeleteProduct && (
-              <button
-                id="btn-detail-delete"
-                onClick={() => {
-                  if (confirm(`Voulez-vous vraiment supprimer définitivement la pièce "${product.name}" ?`)) {
-                    onDeleteProduct(product.id);
-                    onBack();
-                  }
-                }}
-                className="w-full py-3 px-6 border border-red-200 bg-red-50 hover:bg-red-600 hover:text-white hover:border-red-600 text-red-600 text-[10px] uppercase tracking-[0.2em] font-bold transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer"
-              >
-                <Trash2 className="w-3.5 h-3.5" />
-                <span>Supprimer cette pièce</span>
-              </button>
-            )}
 
             {/* Editorial trust info */}
             <div className="grid grid-cols-3 gap-4 pt-4 text-center border-t border-charcoal/5">

@@ -12,11 +12,10 @@ import { STORES_CATEGORIES } from "../data";
 interface StorefrontProps {
   products: Product[];
   onAddToCart: (product: Product) => void;
-  onDeleteProduct?: (id: string) => void;
   selectedVendeurSlug?: string;
 }
 
-export const Storefront: React.FC<StorefrontProps> = ({ products, onAddToCart, onDeleteProduct, selectedVendeurSlug }) => {
+export const Storefront: React.FC<StorefrontProps> = ({ products, onAddToCart, selectedVendeurSlug }) => {
   const [selectedCategory, setSelectedCategory] = useState<string>("Tous");
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [sortBy, setSortBy] = useState<string>("default");
@@ -334,31 +333,17 @@ export const Storefront: React.FC<StorefrontProps> = ({ products, onAddToCart, o
                       {product.price.toLocaleString('fr-FR')} FCFA
                     </div>
 
-                    <div className="flex items-center gap-2">
-                      {onDeleteProduct && (
-                        <button
-                          id={`btn-delete-storefront-${product.id}`}
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            if (confirm(`Voulez-vous vraiment supprimer définitivement la pièce "${product.name}" ?`)) {
-                              onDeleteProduct(product.id);
-                            }
-                          }}
-                          className="p-2 border border-red-200 text-red-600 hover:bg-red-600 hover:text-white hover:border-red-600 transition-colors cursor-pointer flex items-center justify-center bg-red-50/50"
-                          title="Supprimer ce produit"
-                        >
-                          <Trash2 className="w-3.5 h-3.5" />
-                        </button>
-                      )}
-
-                      <button
-                        id={`btn-add-cart-${product.id}`}
-                        onClick={() => onAddToCart(product)}
-                        className="px-4 py-2 bg-charcoal text-white text-[10px] uppercase tracking-widest font-sans font-bold border border-charcoal hover:bg-white hover:text-charcoal transition-colors cursor-pointer"
-                      >
-                        <span>Acheter</span>
-                      </button>
-                    </div>
+                    <a
+                      id={`btn-add-cart-${product.id}`}
+                      href={`https://wa.me/237693573891?text=${encodeURIComponent(
+                        `Bonjour, je souhaite acheter la pièce unique "${product.name}" au prix de ${product.price.toLocaleString('fr-FR')} FCFA.`
+                      )}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-4 py-2 bg-charcoal text-white text-[10px] uppercase tracking-widest font-sans font-bold border border-charcoal hover:bg-white hover:text-charcoal transition-colors cursor-pointer flex items-center justify-center text-center"
+                    >
+                      <span>Acheter</span>
+                    </a>
                   </div>
                 </div>
               </motion.div>
@@ -457,22 +442,6 @@ export const Storefront: React.FC<StorefrontProps> = ({ products, onAddToCart, o
                   >
                     <span>Ajouter à votre Sélection</span>
                   </button>
-
-                  {onDeleteProduct && (
-                    <button
-                      id="modal-delete-product"
-                      onClick={() => {
-                        if (confirm(`Voulez-vous vraiment supprimer définitivement la pièce "${selectedProduct.name}" ?`)) {
-                          onDeleteProduct(selectedProduct.id);
-                          setSelectedProduct(null);
-                        }
-                      }}
-                      className="w-full py-2.5 border border-red-200 bg-red-50 text-red-600 font-sans text-xs uppercase tracking-widest font-bold hover:bg-red-600 hover:text-white hover:border-red-600 transition-colors cursor-pointer flex items-center justify-center gap-2"
-                    >
-                      <Trash2 className="w-3.5 h-3.5" />
-                      <span>Supprimer cette pièce</span>
-                    </button>
-                  )}
 
                   <button
                     id="modal-share"
