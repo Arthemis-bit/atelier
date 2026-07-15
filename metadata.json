@@ -1,0 +1,6 @@
+{
+  "name": "Boutique Interactive",
+  "description": "Un site de vente élégant où vous pouvez ajouter vos propres produits, modifier leurs prix et descriptions, et simuler des ventes.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
