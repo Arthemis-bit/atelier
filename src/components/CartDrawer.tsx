@@ -134,7 +134,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                           {item.product.name}
                         </h4>
                         <div className="text-xs font-sans font-bold text-charcoal/80 mt-1">
-                          {item.product.price.toFixed(2)} €
+                          {item.product.price.toLocaleString('fr-FR')} FCFA
                         </div>
 
                         {/* Controls */}
@@ -185,7 +185,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                   <div className="space-y-2">
                     <div className="flex justify-between text-xs font-sans uppercase tracking-wider text-charcoal/60">
                       <span>Sous-total</span>
-                      <span className="font-sans font-bold">{subtotal.toFixed(2)} €</span>
+                      <span className="font-sans font-bold">{subtotal.toLocaleString('fr-FR')} FCFA</span>
                     </div>
                     <div className="flex justify-between text-xs font-sans uppercase tracking-wider text-charcoal/60">
                       <span>Livraison d'Atelier</span>
@@ -194,7 +194,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                     <div className="border-t border-charcoal/10 my-3 pt-3 flex justify-between text-base font-serif text-charcoal">
                       <span>Total Estimé</span>
                       <span className="font-sans font-bold text-lg text-charcoal">
-                        {subtotal.toFixed(2)} €
+                        {subtotal.toLocaleString('fr-FR')} FCFA
                       </span>
                     </div>
                   </div>
@@ -286,12 +286,12 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                     <span className="truncate max-w-[220px]">
                       {item.product.name} x{item.quantity}
                     </span>
-                    <span>{(item.product.price * item.quantity).toFixed(2)} €</span>
+                    <span>{(item.product.price * item.quantity).toLocaleString('fr-FR')} FCFA</span>
                   </div>
                 ))}
                 <div className="border-t border-charcoal/15 pt-2 flex justify-between font-bold text-sm">
                   <span>Total Réglé</span>
-                  <span>{subtotal.toFixed(2)} €</span>
+                  <span>{subtotal.toLocaleString('fr-FR')} FCFA</span>
                 </div>
                 <div className="text-center text-[9px] text-charcoal/50 pt-1.5 font-sans uppercase tracking-wider">
                   {new Date().toLocaleDateString("fr-FR")} — ATELIER ÉPURÉ

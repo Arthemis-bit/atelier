@@ -4,7 +4,7 @@
  */
 
 import React, { useState } from "react";
-import { Search, SlidersHorizontal, Eye, Plus, ShoppingBag, Star, X, Share2, Check } from "lucide-react";
+import { Search, SlidersHorizontal, Eye, Plus, ShoppingBag, Star, X, Share2, Check, Trash2 } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { Product } from "../types";
 import { STORES_CATEGORIES } from "../data";
@@ -12,10 +12,11 @@ import { STORES_CATEGORIES } from "../data";
 interface StorefrontProps {
   products: Product[];
   onAddToCart: (product: Product) => void;
+  onDeleteProduct?: (id: string) => void;
   selectedVendeurSlug?: string;
 }
 
-export const Storefront: React.FC<StorefrontProps> = ({ products, onAddToCart, selectedVendeurSlug }) => {
+export const Storefront: React.FC<StorefrontProps> = ({ products, onAddToCart, onDeleteProduct, selectedVendeurSlug }) => {
   const [selectedCategory, setSelectedCategory] = useState<string>("Tous");
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [sortBy, setSortBy] = useState<string>("default");
@@ -330,16 +331,34 @@ export const Storefront: React.FC<StorefrontProps> = ({ products, onAddToCart, s
                   {/* Bottom details price & add button */}
                   <div className="flex items-center justify-between border-t border-charcoal/10 pt-4">
                     <div className="font-sans text-sm font-bold tracking-wider text-charcoal">
-                      {product.price.toFixed(2)} €
+                      {product.price.toLocaleString('fr-FR')} FCFA
                     </div>
 
-                    <button
-                      id={`btn-add-cart-${product.id}`}
-                      onClick={() => onAddToCart(product)}
-                      className="px-4 py-2 bg-charcoal text-white text-[10px] uppercase tracking-widest font-sans font-bold border border-charcoal hover:bg-white hover:text-charcoal transition-colors cursor-pointer"
-                    >
-                      <span>Acheter</span>
-                    </button>
+                    <div className="flex items-center gap-2">
+                      {onDeleteProduct && (
+                        <button
+                          id={`btn-delete-storefront-${product.id}`}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            if (confirm(`Voulez-vous vraiment supprimer définitivement la pièce "${product.name}" ?`)) {
+                              onDeleteProduct(product.id);
+                            }
+                          }}
+                          className="p-2 border border-red-200 text-red-600 hover:bg-red-600 hover:text-white hover:border-red-600 transition-colors cursor-pointer flex items-center justify-center bg-red-50/50"
+                          title="Supprimer ce produit"
+                        >
+                          <Trash2 className="w-3.5 h-3.5" />
+                        </button>
+                      )}
+
+                      <button
+                        id={`btn-add-cart-${product.id}`}
+                        onClick={() => onAddToCart(product)}
+                        className="px-4 py-2 bg-charcoal text-white text-[10px] uppercase tracking-widest font-sans font-bold border border-charcoal hover:bg-white hover:text-charcoal transition-colors cursor-pointer"
+                      >
+                        <span>Acheter</span>
+                      </button>
+                    </div>
                   </div>
                 </div>
               </motion.div>
@@ -414,7 +433,7 @@ export const Storefront: React.FC<StorefrontProps> = ({ products, onAddToCart, s
                   </h3>
 
                   <div className="font-sans text-xl font-bold tracking-wider text-charcoal border-b border-charcoal/10 pb-4">
-                    {selectedProduct.price.toFixed(2)} €
+                    {selectedProduct.price.toLocaleString('fr-FR')} FCFA
                   </div>
 
                   <div className="pt-2">

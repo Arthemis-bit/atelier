@@ -185,7 +185,7 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
               <div>
                 <span className="text-[9px] text-charcoal/40 font-sans uppercase tracking-widest block font-bold mb-1">PRIX EXPOSÉ</span>
                 <span className="font-sans text-2xl font-extrabold text-charcoal">
-                  {product.price.toFixed(2)} €
+                  {product.price.toLocaleString('fr-FR')} FCFA
                 </span>
               </div>
               
@@ -249,7 +249,7 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
               id="btn-detail-whatsapp"
               href={getWhatsAppLink(
                 getActiveSellerWhatsapp(),
-                `Bonjour, je souhaite commander la pièce unique "${product.name}" (Réf: ${product.id}) au prix de ${product.price} €.`
+                `Bonjour, je souhaite commander la pièce unique "${product.name}" (Réf: ${product.id}) au prix de ${product.price.toLocaleString('fr-FR')} FCFA.`
               )}
               target="_blank"
               rel="noopener noreferrer"
@@ -363,7 +363,7 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
                     </div>
 
                     <div className="bg-[#F2F0EB] p-3 text-xs font-serif italic text-charcoal/75 border border-charcoal/10">
-                      Montant de la commande : <strong className="text-charcoal not-italic font-sans font-bold text-sm float-right">{product.price.toFixed(2)} €</strong>
+                      Montant de la commande : <strong className="text-charcoal not-italic font-sans font-bold text-sm float-right">{product.price.toLocaleString('fr-FR')} FCFA</strong>
                     </div>
 
                     <div className="grid grid-cols-2 gap-3 pt-2">
@@ -400,7 +400,7 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
                     <p className="font-bold">REÇU DE TRANSACTION : #SIM-{Date.now().toString().slice(-6)}</p>
                     <p>Destinataire : {orderEmail}</p>
                     <p>Pièce : {product.name}</p>
-                    <p>Total payé : {product.price.toFixed(2)} €</p>
+                    <p>Total payé : {product.price.toLocaleString('fr-FR')} FCFA</p>
                   </div>
 
                   <button

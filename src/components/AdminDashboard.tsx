@@ -322,7 +322,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
           </div>
           <div>
             <span className="text-[9px] text-charcoal/50 font-bold uppercase tracking-[0.2em] block">PRIX MOYEN</span>
-            <span className="font-sans text-xl font-bold text-charcoal">{averagePrice.toFixed(2)} €</span>
+            <span className="font-sans text-xl font-bold text-charcoal">{Math.round(averagePrice).toLocaleString('fr-FR')} FCFA</span>
           </div>
         </div>
 
@@ -342,7 +342,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
           </div>
           <div>
             <span className="text-[9px] text-charcoal/50 font-bold uppercase tracking-[0.2em] block">REVENUS SIMULÉS</span>
-            <span className="font-sans text-xl font-bold text-charcoal">{simulatedEarnings.toFixed(2)} €</span>
+            <span className="font-sans text-xl font-bold text-charcoal">{Math.round(simulatedEarnings).toLocaleString('fr-FR')} FCFA</span>
           </div>
         </div>
       </div>
@@ -399,22 +399,22 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
               {/* Prix */}
               <div>
                 <label className="block text-[9px] font-sans font-bold text-charcoal/60 uppercase tracking-widest mb-1.5">
-                  Prix (€) *
+                  Prix (FCFA) *
                 </label>
                 <div className="relative">
                   <input
                     id="form-product-price"
                     type="number"
-                    step="0.01"
-                    min="0.1"
+                    step="1"
+                    min="1"
                     required
                     value={newPrice}
                     onChange={(e) => setNewPrice(e.target.value)}
-                    placeholder="49.00"
-                    className="w-full pl-4 pr-8 py-2.5 border border-charcoal/30 focus:border-charcoal text-xs font-sans tracking-wide bg-transparent outline-none transition-colors font-mono"
+                    placeholder="15000"
+                    className="w-full pl-4 pr-12 py-2.5 border border-charcoal/30 focus:border-charcoal text-xs font-sans tracking-wide bg-transparent outline-none transition-colors font-mono"
                   />
-                  <span className="absolute right-3.5 top-1/2 -translate-y-1/2 text-charcoal/50 font-mono text-xs">
-                    €
+                  <span className="absolute right-3.5 top-1/2 -translate-y-1/2 text-charcoal/50 font-mono text-[10px] font-bold">
+                    FCFA
                   </span>
                 </div>
               </div>
@@ -595,7 +595,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                     <div className="text-left sm:text-right">
                       <div className="text-[9px] text-charcoal/40 font-sans uppercase tracking-widest font-bold">PRIX ACTUEL</div>
                       <div className="font-sans text-sm font-bold text-charcoal">
-                        {product.price.toFixed(2)} €
+                        {product.price.toLocaleString('fr-FR')} FCFA
                       </div>
                     </div>
 
@@ -705,21 +705,21 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                   {/* Price modification */}
                   <div>
                     <label className="block text-[9px] font-sans font-bold text-charcoal/50 uppercase tracking-widest mb-1.5 text-charcoal">
-                      Nouveau Prix (€) *
+                      Nouveau Prix (FCFA) *
                     </label>
                     <div className="relative">
                       <input
                         id="edit-product-price"
                         type="number"
-                        step="0.01"
-                        min="0.1"
+                        step="1"
+                        min="1"
                         required
                         value={editPrice}
                         onChange={(e) => setEditPrice(e.target.value)}
-                        className="w-full pl-3 pr-8 py-2 border border-charcoal text-xs font-sans tracking-wide bg-white outline-none transition-colors font-mono"
+                        className="w-full pl-3 pr-12 py-2 border border-charcoal text-xs font-sans tracking-wide bg-white outline-none transition-colors font-mono"
                       />
-                      <span className="absolute right-3 top-1/2 -translate-y-1/2 text-charcoal font-mono text-xs">
-                        €
+                      <span className="absolute right-3 top-1/2 -translate-y-1/2 text-charcoal font-mono text-[10px] font-bold">
+                        FCFA
                       </span>
                     </div>
                   </div>

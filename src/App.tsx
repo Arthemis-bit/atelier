@@ -421,6 +421,7 @@ export default function App() {
               <Storefront
                 products={products}
                 onAddToCart={handleAddToCart}
+                onDeleteProduct={handleDeleteProduct}
                 selectedVendeurSlug={route.type === "boutique" ? route.vendeurSlug : undefined}
               />
             </motion.div>
