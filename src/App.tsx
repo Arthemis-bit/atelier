@@ -398,6 +398,7 @@ export default function App() {
                 productId={route.id || ""}
                 products={products}
                 onAddToCart={handleAddToCart}
+                onDeleteProduct={handleDeleteProduct}
                 onBack={() => {
                   const product = products.find((p) => p.id === route.id);
                   if (product && product.vendeurSlug) {

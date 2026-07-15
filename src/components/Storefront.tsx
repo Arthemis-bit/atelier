@@ -458,6 +458,22 @@ export const Storefront: React.FC<StorefrontProps> = ({ products, onAddToCart, o
                     <span>Ajouter à votre Sélection</span>
                   </button>
 
+                  {onDeleteProduct && (
+                    <button
+                      id="modal-delete-product"
+                      onClick={() => {
+                        if (confirm(`Voulez-vous vraiment supprimer définitivement la pièce "${selectedProduct.name}" ?`)) {
+                          onDeleteProduct(selectedProduct.id);
+                          setSelectedProduct(null);
+                        }
+                      }}
+                      className="w-full py-2.5 border border-red-200 bg-red-50 text-red-600 font-sans text-xs uppercase tracking-widest font-bold hover:bg-red-600 hover:text-white hover:border-red-600 transition-colors cursor-pointer flex items-center justify-center gap-2"
+                    >
+                      <Trash2 className="w-3.5 h-3.5" />
+                      <span>Supprimer cette pièce</span>
+                    </button>
+                  )}
+
                   <button
                     id="modal-share"
                     onClick={() => {
