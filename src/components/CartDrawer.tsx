@@ -4,7 +4,7 @@
  */
 
 import React, { useState } from "react";
-import { X, Trash2, ShoppingBag, Plus, Minus, CheckCircle, ArrowRight } from "lucide-react";
+import { X, Trash2, ShoppingBag, Plus, Minus, CheckCircle, ArrowRight, MessageSquare } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { CartItem } from "../types";
 
@@ -235,6 +235,22 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                       </>
                     )}
                   </button>
+
+                  <a
+                    id="btn-checkout-whatsapp"
+                    href={`https://wa.me/237693573891?text=${encodeURIComponent(
+                      `Bonjour, je souhaite commander la sélection d'articles de l'Atelier Épuré suivante :\n\n` +
+                      cartItems.map((item) => `• ${item.product.name} (Réf: ${item.product.id}, x${item.quantity}) : ${(item.product.price * item.quantity).toLocaleString('fr-FR')} FCFA`).join("\n") +
+                      `\n\nTotal de la commande : ${subtotal.toLocaleString('fr-FR')} FCFA\nMerci !`
+                    )}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full py-3.5 bg-green-600 hover:bg-green-700 text-white font-sans text-xs uppercase tracking-widest font-bold border border-green-600 hover:border-green-700 transition-colors flex items-center justify-center gap-2 cursor-pointer text-center"
+                  >
+                    <MessageSquare className="w-4 h-4" />
+                    Commander via WhatsApp (693573891)
+                  </a>
+
                   <p className="text-[9px] text-center text-charcoal/40 font-mono">
                     PROTOTYPE - SIMULATION SANS TRANSACTION RÉELLE
                   </p>

@@ -7,9 +7,21 @@ const app = express();
 const PORT = 3000;
 const DB_PATH = path.join(process.cwd(), "database.json");
 
+const DEFAULT_PRODUCTS: any[] = [];
+
 // Ensure database file exists with empty products list by default
 function initDb() {
-  if (!fs.existsSync(DB_PATH)) {
+  const needsSeed = !fs.existsSync(DB_PATH) || (() => {
+    try {
+      const data = fs.readFileSync(DB_PATH, "utf-8");
+      const json = JSON.parse(data);
+      return !json.products;
+    } catch {
+      return true;
+    }
+  })();
+
+  if (needsSeed) {
     fs.writeFileSync(
       DB_PATH,
       JSON.stringify({ products: [], stats: { earnings: 0, salesCount: 0 } }, null, 2),
@@ -148,7 +160,7 @@ app.post("/api/checkout", (req, res) => {
 // API: Reset database
 app.post("/api/reset", (req, res) => {
   const db = {
-    products: [],
+    products: DEFAULT_PRODUCTS,
     stats: {
       earnings: 0,
       salesCount: 0

@@ -371,6 +371,12 @@ export default function App() {
 
   const totalCartItemsCount = cart.reduce((sum, item) => sum + item.quantity, 0);
 
+  const handleNavigate = (e: React.MouseEvent<HTMLAnchorElement>, path: string) => {
+    e.preventDefault();
+    window.history.pushState({}, "", path);
+    window.dispatchEvent(new Event("popstate"));
+  };
+
   return (
     <div className="min-h-screen bg-[#FDFBF7] flex flex-col font-sans text-charcoal selection:bg-charcoal/10 selection:text-charcoal">
       {/* Header component */}
@@ -475,10 +481,22 @@ export default function App() {
               <div className="space-y-2">
                 <h4 className="text-[10px] font-sans font-bold text-charcoal/50 uppercase tracking-widest">ESPACES CLIENTS</h4>
                 <ul className="text-xs text-charcoal/80 font-serif italic space-y-1.5">
-                  <li><a href="/boutique" className="hover:underline">Boutique Générale</a></li>
+                  <li>
+                    <a 
+                      href="/" 
+                      onClick={(e) => handleNavigate(e, "/")} 
+                      className="hover:underline"
+                    >
+                      Boutique Générale
+                    </a>
+                  </li>
                   {products.length > 0 && (
                     <li className="truncate">
-                      <a href={`/boutique/${products[0].vendeurSlug}`} className="hover:underline">
+                      <a 
+                        href={`/boutique/${products[0].vendeurSlug}`} 
+                        onClick={(e) => handleNavigate(e, `/boutique/${products[0].vendeurSlug}`)} 
+                        className="hover:underline"
+                      >
                         Vitrine de {products[0].vendeur}
                       </a>
                     </li>

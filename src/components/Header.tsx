@@ -26,7 +26,14 @@ export const Header: React.FC<HeaderProps> = ({
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           {/* Logo */}
-          <div className="flex items-center gap-4">
+          <div 
+            onClick={() => {
+              window.history.pushState({}, "", "/");
+              window.dispatchEvent(new Event("popstate"));
+            }}
+            className="flex items-center gap-4 cursor-pointer hover:opacity-85 transition-opacity"
+            title="Retour à la boutique générale"
+          >
             <div className="w-10 h-10 border border-charcoal bg-charcoal flex items-center justify-center text-white">
               <ShoppingBag className="w-4.5 h-4.5" id="logo-icon" />
             </div>
